@@ -30,7 +30,7 @@ def print(students)
   counter = 0
   while counter < students.length do
       puts " #{students[counter][:name]} #{students[counter][:height]}
-      #{students[counter][:weight]} (#{students[counter][:cohort]} cohort)"
+      #{students[counter][:weight]} (#{students[counter][:cohort]} cohort)".center(20)
       counter += 1
   end
 end
