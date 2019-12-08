@@ -4,15 +4,15 @@ def input_students
   #create an empty array
   students = []
   #get the first name
-  name = gets.chomp
+  name = gets.gsub(/\n/, "")
   #whilst the name is not empty, repeat this code
   while !name.empty? do
     puts "What is students cohort"
-    cohort = gets.chomp
+    cohort = gets.gsub(/\n/, "")
     puts "What is students height"
-    height = gets.chomp
+    height = gets.gsub(/\n/, "")
     puts "What is students weight"
-    weight = gets.chomp
+    weight = gets.gsub(/\n/, "")
     height = :unknown if height.empty?
     cohort = :unknown if cohort.empty?
     weight = :unknown if weight.empty?
@@ -20,7 +20,7 @@ def input_students
     students << {name: name, cohort: cohort, height: height, weight: weight}
     puts "Now we have #{students.count} students"
     #get another name from the user
-    name = gets.chomp
+    name = gets.gsub(/\n/, "")
   end
   #return the array of students
   students
