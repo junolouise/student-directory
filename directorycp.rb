@@ -22,8 +22,6 @@ def input_students
     #get another name from the user
     name = gets.gsub(/\n/, "")
   end
-  #return the array of students
-  @students
 end
 
 def print_header
@@ -31,10 +29,10 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
+def print_students_list
   students_by_cohort = {}
 
-  students.each do |student|
+  @students.each do |student|
     cohort = student[:cohort]
     name = student[:name]
 
@@ -47,38 +45,41 @@ def print(students)
   end
 end
 
-def print_footer(names)
-  puts "Overall, we have #{names.count} great student#{'s' unless names.count == 1}"
+def print_footer
+  puts "Overall, we have #{@students.count} great student#{'s' unless @students.count == 1}"
 end
 
 def interactive_menu
-
   loop do
-    # 1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit" # 9 because we'll be adding more items
-    # 2. read the input and save it into a variable
-    selection = gets.chomp
-    # 3. do what the user has asked
-    case selection
-    when "1"
-      @students = input_students
-    when "2"
-      print_header
-      print(students)
-      print_footer(students)
-    when "9"
-      exit # this will cause the program to terminate
-    else
-      puts "I don't know what you meant, try again"
-    end
+    print_menu
+    process(gets.chomp)
   end
 end
 
+def process(selection)
+  case selection
+  when "1"
+    @students = input_students
+  when "2"
+    show_students
+  when "9"
+    exit # this will cause the program to terminate
+  else
+    puts "I don't know what you meant, try again"
+  end
+end
+
+def show_students
+  print_header
+  print_students_list
+  print_footer
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+
 interactive_menu
-students = input_students
 #nothing happens until we call the methods
-print_header
-print(@students) unless @students.empty?
-print_footer(@students)
