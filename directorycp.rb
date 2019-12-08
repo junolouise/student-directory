@@ -48,11 +48,11 @@ def print(students)
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great student#{'s' if names.count == 1}"
+  puts "Overall, we have #{names.count} great student#{'s' unless names.count == 1}"
 end
 
 students = input_students
 #nothing happens until we call the methods
 print_header
-print(students)
+print(students) unless students.empty?
 print_footer(students)
