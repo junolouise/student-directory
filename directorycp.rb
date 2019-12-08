@@ -7,12 +7,17 @@ def input_students
   name = gets.chomp
   #whilst the name is not empty, repeat this code
   while !name.empty? do
+    puts "What is students cohort"
+    cohort = gets.chomp
     puts "What is students height"
     height = gets.chomp
     puts "What is students weight"
     weight = gets.chomp
+    height = :unknown if height.empty?
+    cohort = :unknown if cohort.empty?
+    weight = :unknown if weight.empty?
     # add the student hash to the array
-    students << {name: name, cohort: :november, height: height, weight: weight}
+    students << {name: name, cohort: cohort, height: height, weight: weight}
     puts "Now we have #{students.count} students"
     #get another name from the user
     name = gets.chomp
@@ -27,11 +32,18 @@ def print_header
 end
 
 def print(students)
-  counter = 0
-  while counter < students.length do
-      puts " #{students[counter][:name]} #{students[counter][:height]}
-      #{students[counter][:weight]} (#{students[counter][:cohort]} cohort)".center(20)
-      counter += 1
+  students_by_cohort = {}
+
+  students.each do |student|
+    cohort = student[:cohort]
+    name = student[:name]
+
+    students_by_cohort[cohort] ||= []
+
+    students_by_cohort[cohort].push(name)
+  end
+  students_by_cohort.each do |cohort, names|
+    puts "Students for #{cohort}: #{names.join(" ,")}"
   end
 end
 
